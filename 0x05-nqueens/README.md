@@ -1,27 +1,52 @@
-# N queens
+# N Queens
 
-The N queens puzzle is a challenge of placing N non-attacking queens on an NxN chessboard.
+Contains methods that find the possible solutions to the n-queens can
+be placed without them attacking each other(The n-queens problem).
 
-On a chessboard, the queen can move any number of squares vertically, horizontally
-or diagonally.Thus, to solve the puzzle, each queen must be placed on its own
-row, column and diagonal.
+## Files
 
-This is most efficiently solved using a backtracking algorithm. Backtracking is
-a general algorithm for finding solutions to some computational problems that
-incrementally builds candidates to the solutions, and abandons a candidate i.e.,
-backtracks as soon as it determines that the candidate cannot possibly be completed
-to a valid solution.
+### [0-nqueens.py](./0-nqueens.py)
 
-## Usage
+Usage: `./0-nqueens.py N`
 
-```nqueens N```
-where N is the number of queens.
-      - N must be an integer greater or equal to 4
-      - the program prints every possible solution to the problem in the format
-        shown below
-```
-$ ./0-nqueens 4
+`N` is the number of queens to place.
+
+Sample Output:
+
+```commandline
+candiepih@ubuntu:~/0x08. N Queens$ ./0-nqueens.py 4
 [[0, 1], [1, 3], [2, 0], [3, 2]]
 [[0, 2], [1, 0], [2, 3], [3, 1]]
+candiepih@ubuntu:~/0x08. N Queens$ ./0-nqueens.py 6
+[[0, 1], [1, 3], [2, 5], [3, 0], [4, 2], [5, 4]]
+[[0, 2], [1, 5], [2, 1], [3, 4], [4, 0], [5, 3]]
+[[0, 3], [1, 0], [2, 4], [3, 1], [4, 5], [5, 2]]
+[[0, 4], [1, 2], [2, 0], [3, 5], [4, 3], [5, 1]]
+candiepih@ubuntu:~/0x08. N Queens$ 
 ```
-Each inner list represents the coordinates of a queen in the NxN chessboard.
+
+
+
+The main file for the project.
+
+**Algorithm**:
+
+1. Start in the leftmost column
+2. If all queens are placed
+    `return true`
+3. Try all rows in the current column.
+    For every row:
+
+   
+    a) If the queen can be placed safely in this row 
+       then mark this [row, column] as part of the 
+       solution and recursively check if placing
+       queen here leads to a solution.
+    b) If placing the queen in [row, column] leads to
+       a solution then return true.
+    c) If placing queen doesn't lead to a solution then
+       unmark this [row, column] (Backtrack) and go to 
+       step (a) to try other rows.
+
+4. If all rows have been tried and nothing worked,
+   return false to trigger backtracking.
